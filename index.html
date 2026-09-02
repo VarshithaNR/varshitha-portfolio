@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varshitha N R — AI &amp; Backend Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --paper: #F1F3EE;
+            --paper-dim: #E7EAE2;
+            --ink: #16232A;
+            --ink-soft: #4C5D62;
+            --accent: #C9862E;
+            --accent-2: #2F6F63;
+            --line: #CFD4C7;
+            --maxw: 1180px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        h1,
+        h2,
+        h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+        
+        a {
+            color: inherit;
+        }
+        
+        .wrap {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        /* ---------- layout shell ---------- */
+        
+        .shell {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 64px;
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        
+        .rail {
+            position: sticky;
+            top: 0;
+            align-self: start;
+            padding-top: 56px;
+            height: 100vh;
+        }
+        
+        .rail .mark {
+            font-family: 'Fraunces', serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 44px;
+        }
+        
+        .rail nav {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        
+        .rail nav a {
+            font-size: 14px;
+            color: var(--ink-soft);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            padding-left: 12px;
+            transition: color .2s ease, border-color .2s ease;
+        }
+        
+        .rail nav a:hover,
+        .rail nav a:focus-visible,
+        .rail nav a.active {
+            color: var(--ink);
+            border-left-color: var(--accent);
+            outline: none;
+        }
+        
+        .rail .rail-foot {
+            position: absolute;
+            bottom: 56px;
+            font-size: 13px;
+            color: var(--ink-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .rail .rail-foot a {
+            text-decoration: underline;
+            text-decoration-color: var(--line);
+        }
+        
+        main {
+            padding-top: 56px;
+            min-width: 0;
+        }
+        
+        section {
+            padding-bottom: 120px;
+        }
+        
+        section:last-of-type {
+            padding-bottom: 64px;
+        }
+        
+        .eyebrow {
+            font-size: 13px;
+            color: var(--ink-soft);
+            margin-bottom: 18px;
+        }
+        /* ---------- hero ---------- */
+        
+        .hero h1 {
+            font-size: clamp(34px, 4.4vw, 54px);
+            line-height: 1.12;
+            max-width: 15ch;
+        }
+        
+        .hero .role {
+            margin-top: 22px;
+            font-size: 17px;
+            color: var(--ink-soft);
+            max-width: 52ch;
+        }
+        
+        .hero .role strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        
+        .hero-links {
+            margin-top: 30px;
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-links a {
+            font-size: 14px;
+            text-decoration: none;
+            border-bottom: 1px solid var(--ink);
+            padding-bottom: 2px;
+        }
+        
+        .hero-links a.primary {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 10px 18px;
+            border-bottom: none;
+            border-radius: 2px;
+        }
+        /* waveform */
+        
+        .waveform {
+            margin-top: 56px;
+            height: 110px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+        }
+        
+        .waveform .bar {
+            flex: 1 1 0;
+            max-width: 7px;
+            background: var(--ink-soft);
+            border-radius: 1px;
+            transform-origin: bottom;
+            height: 6px;
+            transition: height 1.1s cubic-bezier(.22, .9, .3, 1), background-color 1.1s ease;
+        }
+        
+        .waveform.settled .bar {
+            background: var(--accent-2);
+        }
+        
+        .waveform.settled .bar:nth-child(odd) {
+            background: var(--accent);
+        }
+        
+        .waveform-caption {
+            margin-top: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--ink-soft);
+        }
+        /* ---------- section headings ---------- */
+        
+        .sec-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-top: 1px solid var(--line);
+            padding-top: 18px;
+            margin-bottom: 44px;
+        }
+        
+        .sec-head h2 {
+            font-size: 28px;
+        }
+        
+        .sec-head .count {
+            font-size: 13px;
+            color: var(--ink-soft);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        /* ---------- work ---------- */
+        
+        .project {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            padding: 34px 0;
+            border-bottom: 1px solid var(--line);
+        }
+        
+        .project:first-of-type {
+            padding-top: 0;
+        }
+        
+        .project-name {
+            font-size: 22px;
+            max-width: 14ch;
+        }
+        
+        .project-tags {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .project-tags span {
+            font-size: 12px;
+            color: var(--ink-soft);
+            border: 1px solid var(--line);
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+        
+        .project-desc {
+            color: var(--ink-soft);
+            max-width: 56ch;
+        }
+        
+        .project-desc strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 13px;
+            color: var(--accent-2);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-2);
+            padding-bottom: 1px;
+        }
+        
+        .project-link:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        
+        @media (max-width:640px) {
+            .project {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* ---------- experience ---------- */
+        
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 6px;
+            bottom: 6px;
+            width: 1px;
+            background: var(--line);
+        }
+        
+        .role-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .role-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .role-item::before {
+            content: "";
+            position: absolute;
+            left: -28px;
+            top: 6px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--accent-2);
+            border: 2px solid var(--paper);
+            box-shadow: 0 0 0 1px var(--line);
+        }
+        
+        .role-item .role-meta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+        }
+        
+        .role-item h3 {
+            font-size: 19px;
+            margin-bottom: 4px;
+        }
+        
+        .role-item .org {
+            color: var(--accent-2);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .role-item ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--ink-soft);
+        }
+        
+        .role-item li {
+            margin-bottom: 6px;
+        }
+        /* ---------- skills ---------- */
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 34px 48px;
+        }
+        
+        .skill-group h3 {
+            font-size: 14px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 400;
+            color: var(--accent-2);
+            margin-bottom: 10px;
+            text-transform: lowercase;
+        }
+        
+        .skill-group p {
+            margin: 0;
+            color: var(--ink-soft);
+        }
+        
+        @media (max-width:640px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* ---------- education ---------- */
+        
+        .edu-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line);
+        }
+        
+        .edu-row:first-child {
+            padding-top: 0;
+        }
+        
+        .edu-row .school {
+            font-weight: 500;
+        }
+        
+        .edu-row .degree {
+            color: var(--ink-soft);
+            font-size: 14px;
+        }
+        
+        .edu-row .score {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            color: var(--ink-soft);
+            white-space: nowrap;
+        }
+        
+        .certs {
+            margin-top: 28px;
+            color: var(--ink-soft);
+            font-size: 14px;
+        }
+        
+        .certs strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+        /* ---------- contact ---------- */
+        
+        .contact h2 {
+            font-size: clamp(28px, 3.6vw, 42px);
+            max-width: 16ch;
+        }
+        
+        .contact p {
+            color: var(--ink-soft);
+            margin-top: 16px;
+            max-width: 48ch;
+        }
+        
+        .contact-links {
+            margin-top: 34px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .contact-links a {
+            font-size: 15px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 10px;
+            width: fit-content;
+            border-bottom: 1px solid transparent;
+        }
+        
+        .contact-links a:hover {
+            border-bottom-color: var(--ink);
+        }
+        
+        .contact-links .label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--accent-2);
+        }
+        
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 24px 0 0;
+            font-size: 12px;
+            color: var(--ink-soft);
+            display: flex;
+            justify-content: space-between;
+        }
+        /* mobile rail collapse */
+        
+        @media (max-width:860px) {
+            .shell {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .rail {
+                position: static;
+                height: auto;
+                padding-top: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 16px;
+                border-bottom: 1px solid var(--line);
+                padding-bottom: 20px;
+                margin-bottom: 8px;
+            }
+            .rail nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            .rail nav a {
+                border-left: none;
+                padding-left: 0;
+                border-bottom: 2px solid transparent;
+            }
+            .rail nav a:hover {
+                border-left: none;
+                border-bottom-color: var(--accent);
+            }
+            .rail .rail-foot {
+                position: static;
+                flex-direction: row;
+                gap: 16px;
+            }
+            main {
+                padding-top: 32px;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .waveform .bar {
+                transition: none;
+            }
+        }
+        /* ---------- scroll reveal ---------- */
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+        /* ---------- interactive project rows ---------- */
+        
+        .project {
+            border-left: 2px solid transparent;
+            padding-left: 0;
+            transition: border-color .25s ease, padding-left .25s ease, background-color .25s ease;
+        }
+        
+        .project:hover {
+            border-left-color: var(--accent);
+            padding-left: 16px;
+            background: var(--paper-dim);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="shell">
+        <aside class="rail">
+            <div class="mark">VNR</div>
+            <nav id="siteNav">
+                <a href="#work" data-nav="work">Work</a>
+                <a href="#experience" data-nav="experience">Experience</a>
+                <a href="#skills" data-nav="skills">Skills</a>
+                <a href="#education" data-nav="education">Education</a>
+                <a href="#contact" data-nav="contact">Contact</a>
+            </nav>
+            <div class="rail-foot">
+                <a href="https://github.com/VarshithaNR" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://linkedin.com/in/varshitha-n-r-751682267" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+        </aside>
+
+        <main>
+            <section class="hero" id="top">
+                <div class="eyebrow">Varshitha N R — Channarayapatna, Karnataka</div>
+                <h1>I build the systems that separate signal from noise.</h1>
+                <p class="role">
+                    <strong>AI &amp; Backend Engineer</strong> — Computer Science Engineering graduate, CGPA 9.10/10, who builds ML pipelines, REST APIs, and mobile products. Currently a Software Developer Intern at
+                    <strong>InVitto</strong>, Bengaluru, working in React Native and TypeScript.
+                </p>
+                <div class="hero-links">
+                    <a class="primary" href="#work">View the work</a>
+                    <a href="mailto:rakshuvashu216@gmail.com">Email</a>
+                    <a href="https://github.com/VarshithaNR" target="_blank" rel="noopener">GitHub</a>
+                </div>
+
+                <div class="waveform" id="waveform" aria-hidden="true"></div>
+                <div class="waveform-caption">two of the projects below are, literally, about telling signal from noise</div>
+            </section>
+
+            <section id="work">
+                <div class="sec-head">
+                    <h2>Selected work</h2>
+                    <span class="count">03 projects</span>
+                </div>
+
+                <div class="project reveal">
+                    <div>
+                        <div class="project-name">Fake News Detection System</div>
+                        <div class="project-tags">
+                            <span>Python</span><span>Scikit-learn</span><span>NLP</span><span>Streamlit</span>
+                        </div>
+                    </div>
+                    <p class="project-desc">
+                        Trained and compared four classifiers — <strong>Logistic Regression, Naive Bayes, Random Forest,
+          and an artificial neural network</strong> — to flag news articles likely to be misleading, then wrapped the strongest model in a Streamlit app so a prediction is something a person can use, not just a number in a notebook.
+                    </p>
+                    <a class="project-link" href="https://github.com/VarshithaNR" target="_blank" rel="noopener">View on GitHub</a>
+                </div>
+
+                <div class="project reveal">
+                    <div>
+                        <div class="project-name">Sound-Based Bird Species Recognition</div>
+                        <div class="project-tags">
+                            <span>Python</span><span>Machine Learning</span><span>Audio Processing</span>
+                        </div>
+                    </div>
+                    <p class="project-desc">
+                        Extracted acoustic features from field recordings and trained classifiers to identify bird species by sound alone — the same feature-extraction-and-classification thinking as the fake news project, pointed at nature instead of language.
+                    </p>
+                    <a class="project-link" href="https://github.com/VarshithaNR" target="_blank" rel="noopener">View on GitHub</a>
+                </div>
+
+                <div class="project reveal">
+                    <div>
+                        <div class="project-name">Parking Management System</div>
+                        <div class="project-tags">
+                            <span>PHP</span><span>MySQL</span><span>HTML/CSS</span><span>JavaScript</span>
+                        </div>
+                    </div>
+                    <p class="project-desc">
+                        A web-based system for tracking parking slot availability and supporting administrative operations end to end — from the database schema to the interface staff use day to day.
+                    </p>
+                    <a class="project-link" href="https://github.com/VarshithaNR" target="_blank" rel="noopener">View on GitHub</a>
+                </div>
+            </section>
+
+            <section id="experience">
+                <div class="sec-head">
+                    <h2>Experience</h2>
+                    <span class="count">2 roles</span>
+                </div>
+                <div class="timeline">
+                    <div class="role-item reveal">
+                        <div class="role-meta">JULY 2026 — PRESENT</div>
+                        <h3>Software Developer Intern</h3>
+                        <div class="org">InVitto, Bengaluru</div>
+                        <ul>
+                            <li>Contributing to mobile application development using React Native and TypeScript.</li>
+                            <li>Developing and improving UIs, navigation, reusable components, and app features.</li>
+                            <li>Troubleshooting UI and functional issues and implementing fixes against project requirements.</li>
+                            <li>Collaborating with the development team to scope and deliver assigned tasks.</li>
+                        </ul>
+                    </div>
+                    <div class="role-item reveal">
+                        <div class="role-meta">FEB 2026 — MAY 2026</div>
+                        <h3>Data Science Intern</h3>
+                        <div class="org">Priston Smart Engineers, Bengaluru</div>
+                        <ul>
+                            <li>Analyzed and resolved data quality issues through structured troubleshooting and root-cause analysis.</li>
+                            <li>Documented processes, findings, and methodologies for knowledge sharing.</li>
+                            <li>Analyzed data trends and supported improvements to existing workflows.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills">
+                <div class="sec-head">
+                    <h2>Skills</h2>
+                    <span class="count">5 groups</span>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-group reveal">
+                        <h3>languages</h3>
+                        <p>Java, Python, SQL, JavaScript, TypeScript, PHP</p>
+                    </div>
+                    <div class="skill-group reveal">
+                        <h3>frameworks &amp; libraries</h3>
+                        <p>React Native, Streamlit</p>
+                    </div>
+                    <div class="skill-group reveal">
+                        <h3>databases</h3>
+                        <p>MySQL, MongoDB</p>
+                    </div>
+                    <div class="skill-group reveal">
+                        <h3>tools</h3>
+                        <p>Git, GitHub, VS Code, MS Excel, MS Office</p>
+                    </div>
+                    <div class="skill-group reveal">
+                        <h3>foundations</h3>
+                        <p>Data Structures &amp; Algorithms, OOP, DBMS, Operating Systems, Computer Networks, Machine Learning</p>
+                    </div>
+                    <div class="skill-group reveal">
+                        <h3>languages spoken</h3>
+                        <p>English, Kannada, Hindi</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="education">
+                <div class="sec-head">
+                    <h2>Education</h2>
+                    <span class="count">2022 — 2026</span>
+                </div>
+                <div class="edu-row reveal">
+                    <div>
+                        <div class="school">Malnad College of Engineering, Hassan</div>
+                        <div class="degree">B.E., Computer Science Engineering · 2022–2026</div>
+                    </div>
+                    <div class="score">CGPA 9.10/10</div>
+                </div>
+                <div class="edu-row reveal">
+                    <div>
+                        <div class="school">Malnad PU College, Hassan</div>
+                        <div class="degree">Pre-University · 2021</div>
+                    </div>
+                    <div class="score">91.4%</div>
+                </div>
+                <div class="edu-row reveal">
+                    <div>
+                        <div class="school">Poorna Chandra Public School</div>
+                        <div class="degree">SSLC · 2019</div>
+                    </div>
+                    <div class="score">86.5%</div>
+                </div>
+                <p class="certs">
+                    <strong>Certifications:</strong> Software Project Management (NPTEL) · Ethical Hacking (NPTEL) · Web Development (IUCEE EWB)
+                </p>
+            </section>
+
+            <section class="contact" id="contact">
+                <div class="sec-head">
+                    <h2>Get in touch</h2>
+                </div>
+                <p>Open to Junior AI / Backend Engineer roles — happiest working in the space between a model and the API that serves it.</p>
+                <div class="contact-links">
+                    <a href="mailto:rakshuvashu216@gmail.com"><span class="label">EMAIL</span> rakshuvashu216@gmail.com</a>
+                    <a href="tel:+918861272232"><span class="label">PHONE</span> +91 88612 72232</a>
+                    <a href="https://linkedin.com/in/varshitha-n-r-751682267" target="_blank" rel="noopener"><span class="label">LINKEDIN</span> /in/varshitha-n-r-751682267</a>
+                    <a href="https://github.com/VarshithaNR" target="_blank" rel="noopener"><span class="label">GITHUB</span> /VarshithaNR</a>
+                </div>
+                <footer>
+                    <span>Varshitha N R</span>
+                    <span>Channarayapatna, Karnataka</span>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // One orchestrated hero moment: bars start as noise, settle into a clean waveform.
+        (function() {
+            var wf = document.getElementById('waveform');
+            var count = 46;
+            var bars = [];
+            for (var i = 0; i < count; i++) {
+                var b = document.createElement('div');
+                b.className = 'bar';
+                var noiseHeight = 8 + Math.random() * 90;
+                b.style.height = noiseHeight + 'px';
+                wf.appendChild(b);
+                bars.push(b);
+            }
+
+            function settledHeight(i, n) {
+                // a clean composite sine so it reads as a real waveform, not random bars
+                var t = i / n;
+                var v = Math.abs(Math.sin(t * Math.PI * 3)) * 0.65 + Math.abs(Math.sin(t * Math.PI * 9)) * 0.35;
+                return 10 + v * 88;
+            }
+
+            function settle() {
+                bars.forEach(function(b, i) {
+                    b.style.height = settledHeight(i, count) + 'px';
+                });
+                wf.classList.add('settled');
+            }
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                settle();
+            } else {
+                window.addEventListener('load', function() {
+                    setTimeout(settle, 550);
+                });
+            }
+
+            // Interactive touch: the waveform responds to the cursor, like a live signal.
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!reduceMotion) {
+                var hero = document.querySelector('.hero');
+                var hoverActive = false;
+                hero.addEventListener('mousemove', function(e) {
+                    if (!wf.classList.contains('settled')) return;
+                    hoverActive = true;
+                    var rect = wf.getBoundingClientRect();
+                    var mx = e.clientX;
+                    bars.forEach(function(b, i) {
+                        var barCenter = rect.left + (rect.width / count) * (i + 0.5);
+                        var dist = Math.abs(mx - barCenter);
+                        var influence = Math.max(0, 1 - dist / 160);
+                        var base = settledHeight(i, count);
+                        var boosted = base + influence * 40 * Math.sin(i * 0.9);
+                        b.style.height = Math.max(8, Math.min(108, boosted)) + 'px';
+                    });
+                });
+                hero.addEventListener('mouseleave', function() {
+                    if (!hoverActive) return;
+                    bars.forEach(function(b, i) {
+                        b.style.height = settledHeight(i, count) + 'px';
+                    });
+                });
+            }
+        })();
+
+        // Scroll reveal for cards, timeline items, and grouped content.
+        (function() {
+            var items = document.querySelectorAll('.reveal');
+            if (!items.length) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                items.forEach(function(el) {
+                    el.classList.add('in');
+                });
+                return;
+            }
+            var io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry, idx) {
+                    if (entry.isIntersecting) {
+                        var el = entry.target;
+                        var delay = (idx % 4) * 70;
+                        setTimeout(function() {
+                            el.classList.add('in');
+                        }, delay);
+                        io.unobserve(el);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -40px 0px'
+            });
+            items.forEach(function(el) {
+                io.observe(el);
+            });
+        })();
+
+        // Scrollspy: highlight the current section in the side nav.
+        (function() {
+            var sections = document.querySelectorAll('main section[id]');
+            var navLinks = document.querySelectorAll('#siteNav a');
+            if (!sections.length || !navLinks.length) return;
+            var map = {};
+            navLinks.forEach(function(a) {
+                map[a.getAttribute('data-nav')] = a;
+            });
+            var io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    var id = entry.target.getAttribute('id');
+                    var link = map[id];
+                    if (!link) return;
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(function(a) {
+                            a.classList.remove('active');
+                        });
+                        link.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0,
+                rootMargin: '-45% 0px -50% 0px'
+            });
+            sections.forEach(function(s) {
+                io.observe(s);
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
